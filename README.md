@@ -1,5 +1,8 @@
 # StochasticGrowthExp-OUProcess
 
+Numerical simulations for the paper ``Growth rate of a stochastic growth process driven by an exponential Ornstein-Uhlenbeck process``,
+Journal of Mathematical Physics 63, 083303 (2022).
+
 Consider a stochastic growth process in discrete time for a quantity $B_i$ defined by $$B_{i+1}=(1+r_i) B_i$$
 Assume for simplicity $B_0=1$.
 
