@@ -1,6 +1,7 @@
 # Stochastic growth process with exp-OU growth rates
 
-Numerical simulations for the paper [Growth rate of a stochastic growth process driven by an exponential Ornstein-Uhlenbeck process (2022)](https://aip.scitation.org/doi/10.1063/5.0065342)
+This repository contains codes for the numerical simulations for the paper [Growth rate of a stochastic growth process driven by an exponential Ornstein-Uhlenbeck process (2022)](https://aip.scitation.org/doi/10.1063/5.0065342) also available on [arxiv](https://arxiv.org/abs/2106.11874).
+A brief summary of the main results of the paper is given below. 
 
 Consider a stochastic growth process in discrete time for a quantity $B_i$ with random growth rates $r_i$ $$B_{i+1}=(1+r_i) B_i$$
 started at $B_0=1$.
@@ -17,7 +18,7 @@ A similar model can be used to describe the growth of a positive quantity with c
 
 The process can be generalized such that the growth rates $r_i$ can be both positive and negative, for example as 
 $$B_{i+1} = \frac{1}{1+\rho} (1 + \rho e^{Z_i - \frac12 var(Z_i) }) B_i\qquad (2)$$ which corresponds to a growth rate
-$$r_i = \frac{1}{1+\rho} (\rho e^{Z_i - \frac12 var(Z_i) } - \rho )$$ This has $\mathbb{E}[r_i]=0$. For simplicity we will consider in the following the original version (1).
+$$r_i = \frac{1}{1+\rho} (\rho e^{Z_i - \frac12 var(Z_i) } - \rho )$$ This process has growth rates averaging to zero $\mathbb{E}[r_i]=0$. 
 
 Let us study the expectation $M_t = \mathbb{E}[B_t]$. If the growth rates $r_t$ were uncorrelated, the expectation $M_t$ would have an exponential growth $M_n = \Pi_{i=0}^{n-1}(1 + \mathbb{E}[r_i]) = (1+\rho)^n$. The exponential growth rate is $\lambda_n := \frac{1}{n} \log M_t=\log(1+\rho)$.
 
@@ -74,4 +75,10 @@ The left plot below shows the expectation $M_n$ for $n=100$ and time step $\tau=
 The growth rate $\lambda_n = \frac{1}{n} \log M_n$ is shown in the right plot. For small $\sigma$, it is close to $\log(1+\rho) \simeq \rho$,
 but as $\sigma$ increases, it becomes larger. 
 
-The theoretical result for $\lambda_n$ is shown as the solid blue curve. It has a sharp turn and increases very rapidly. This phenomenon cannot be seen in a MC simulation because the standard deviation of $B_n$ also explodes to very large values. 
+The theoretical result for $\lambda_n$ is shown as the solid blue curve in the right plot. It has a sharp turn and increases very rapidly. This phenomenon cannot be seen in a MC simulation because the standard deviation of $B_n$ also explodes to very large values. Instead we see an explosion of the MC error, observed as a widening of the error bars. 
+
+The paper proves the existence of the limit $$\lambda(\rho,\beta,a) = \lim_{n\to \infty} \frac{1}{n} \log M_n$$ taken at fixed $\rho$, $\beta := \frac12\sigma^2\tau n^2$ and $a:= \gamma n\tau$. The limit is mathematically equivalent with the thermodynamical pressure of a one-dimensional lattice gas of particles interacting by attractive exponential potentials. This system was studied by [Kac and Helfand (1963)](https://aip.scitation.org/doi/10.1063/1.1704037) so we call it here the *Kac-Helfand gas*. In the large mean-reversion limit $a\to \infty$, the function $\lambda(\rho,\beta,a)$ approaches the van der Waals equation of state. 
+
+The function $\lambda(\rho,\beta,a)$ has discontinuous derivatives with respect to $\rho,\beta$ along a critical curve $\beta_c(\rho,a)$. This phenomenon is associated with a gas-liquid phase transition in the analog lattice gas. This transition is manifested as a kink in the growth rate $\lambda$ shown as the solid blue curve in the right plot above. 
+
+Analytical upper and lower bounds on $\lambda(\rho,\beta,a)$ are obtained, which constrain it with an error less than 4% over the entire range of parameters. (The lower bound is shown in the right plot above.) An exact solution for $\lambda(\rho,\beta,a)$ is presented in Chapter 5 of [Pirjol (2022)](https://link.springer.com/book/10.1007/978-3-031-11143-3).
