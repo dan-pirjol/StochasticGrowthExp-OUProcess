@@ -21,7 +21,7 @@ $$r_i = \frac{1}{1+\rho} (\rho e^{Z_i - \frac12 var(Z_i) } - \rho )$$ This has $
 
 Let us study the expectation $M_t = \mathbb{E}[B_t]$. If the growth rates $r_t$ were uncorrelated, the expectation $M_t$ would have an exponential growth $M_n = \Pi_{i=0}^{n-1}(1 + \mathbb{E}[r_i]) = (1+\rho)^n$. The exponential growth rate is $\lambda_n := \frac{1}{n} \log M_t=\log(1+\rho)$.
 
-We will show that the serial correlation among growth rates $r_i$ changes the growth pattern in an unexpected way. 
+However, the growth rates $r_i$ in the process considered here have serial correlation. Let's simulate the process and compute the sample autocorrelation of $r_i$ 
 
 ## **Simulation**
 
@@ -62,13 +62,16 @@ acf(rate,type="correlation", lag.max=1500, main="ACF(r)")
 
 ```
 
-The autocorrelation of the growth rates for $\gamma=0.1,\sigma=0.2$ shows long-range correlation
+The autocorrelation plot of the growth rates $r_i$ for $\gamma=0.1,\sigma=0.2$ shows long-range correlation. This will be seen to change the growth pattern of $B_n$ in an unexpected way.
 
 <img width="312" alt="test2" src="https://user-images.githubusercontent.com/60016102/225134807-94f3f63e-deb7-4c25-be32-d7296e619ee2.png">
 
+The *Mathematica* code attached evaluates the expectation $M_n$ by Monte Carlo simulation. 
 The left plot below shows the expectation $M_n$ for $n=100$ and time step $\tau=0.01$ with $\gamma=0.1$ as $\sigma$ increases. The parameter $\rho=0.025$. The horizontal black line is at 1. The expectation increases with $\sigma$, first smoothly and then more erratically.
 
 <img width="592" alt="gamma0p1" src="https://user-images.githubusercontent.com/60016102/225136677-364c4a73-ea9f-4199-8d6e-f429bb033aaa.png">
 
 The growth rate $\lambda_n = \frac{1}{n} \log M_n$ is shown in the right plot. For small $\sigma$, it is close to $\log(1+\rho) \simeq \rho$,
 but as $\sigma$ increases, it becomes larger. 
+
+The theoretical result for $\lambda_n$ is shown as the solid blue curve. It has a sharp turn and increases very rapidly. This phenomenon cannot be seen in a MC simulation because the standard deviation of $B_n$ also explodes to very large values. 
