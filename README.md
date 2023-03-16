@@ -62,6 +62,9 @@ abline(h=0, col="red")
 acf(rate,type="correlation", lag.max=1500, main="ACF(r)")
 
 ```
+Sample paths of $r_t$
+
+<img width="312" alt="rtsamplepaths" src="https://user-images.githubusercontent.com/60016102/225652040-1d311aa0-d204-4c12-850c-cf34e0559482.png">
 
 The autocorrelation plot of the growth rates $r_i$ for $\gamma=0.1,\sigma=0.2$ shows long-range correlation. This will be seen to change the growth pattern of $B_n$ in an unexpected way.
 
@@ -73,12 +76,21 @@ The left plot below shows the expectation $M_n$ for $n=100$ and time step $\tau=
 <img width="592" alt="gamma0p1" src="https://user-images.githubusercontent.com/60016102/225136677-364c4a73-ea9f-4199-8d6e-f429bb033aaa.png">
 
 The growth rate $\lambda_n = \frac{1}{n} \log M_n$ is shown in the right plot. For small $\sigma$, it is close to $\log(1+\rho) \simeq \rho$,
-but as $\sigma$ increases, it becomes larger. 
+but as $\sigma$ increases, it becomes larger and with larger errors. 
 
 The theoretical result for $\lambda_n$ is shown as the solid blue curve in the right plot. It has a sharp turn and increases very rapidly. This phenomenon cannot be seen in a MC simulation because the standard deviation of $B_n$ also explodes to very large values. Instead we see an explosion of the MC error, observed as a widening of the error bars. 
 
 The paper proves the existence of the limit $$\lambda(\rho,\beta,a) = \lim_{n\to \infty} \frac{1}{n} \log M_n$$ taken at fixed $\rho$, $\beta := \frac12\sigma^2\tau n^2$ and $a:= \gamma n\tau$. The limit is mathematically equivalent with the thermodynamical pressure of a one-dimensional lattice gas of particles interacting by attractive exponential potentials. This system was studied by [Kac and Helfand (1963)](https://aip.scitation.org/doi/10.1063/1.1704037) so we call it here the *Kac-Helfand gas*. In the large mean-reversion limit $a\to \infty$, the function $\lambda(\rho,\beta,a)$ approaches the van der Waals equation of state. 
 
-The function $\lambda(\rho,\beta,a)$ has discontinuous derivatives with respect to $\rho,\beta$ along a critical curve $\beta_c(\rho,a)$. This phenomenon is associated with a gas-liquid phase transition in the analog lattice gas. This transition is manifested as a kink in the growth rate $\lambda$ shown as the solid blue curve in the right plot above. 
+The function $\lambda(\rho,\beta,a)$ has discontinuous derivatives with respect to $\rho,\beta$ along a critical curve $\beta_c(\rho,a)$. The critical curves for 3 values of $a$ are shown below.
 
-Analytical upper and lower bounds on $\lambda(\rho,\beta,a)$ are obtained, which constrain it with an error less than 4% over the entire range of parameters. (The lower bound is shown in the right plot above.) An exact solution for $\lambda(\rho,\beta,a)$ is presented in Chapter 5 of [Pirjol (2022)](https://link.springer.com/book/10.1007/978-3-031-11143-3).
+<img width="350" alt="criticalCurves" src="https://user-images.githubusercontent.com/60016102/225653989-ee3862e4-003c-4318-aaff-193365afca94.png">
+
+This phenomenon is associated with a gas-liquid phase transition in the analog lattice gas. 
+
+Analytical upper and lower bounds on $\lambda(\rho,\beta,a)$ are obtained, which constrain it with an error less than 4% over the entire range of parameters. (The lower bound is shown in the right plot above.) For $a=1$ and $\rho=0.025$, the lower and upper bounds on $\lambda$ are shown below.
+They are so close that the curves are practically indistinguishable. The kink in this curve is the same as the upwards kink in the growth rate $\lambda$ shown as the solid blue curve in the right plot with the MC simulation. 
+
+<img width="320" alt="boundsLambdaa1" src="https://user-images.githubusercontent.com/60016102/225652640-f94a1037-ccfd-4903-addf-febc5c42fd9d.png">
+
+An exact solution for $\lambda(\rho,\beta,a)$ is derived in Chapter 5 of [Pirjol (2022)](https://link.springer.com/book/10.1007/978-3-031-11143-3).
