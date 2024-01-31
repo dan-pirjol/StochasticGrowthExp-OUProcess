@@ -13,8 +13,12 @@ satisfies the SDE $$dZ_t = - \gamma Z_t dt + \sigma dW_t$$ and mean-reverts to z
 Recall that for a stationary OU process $Z = N(0,\frac{\sigma^2}{2\gamma})$. Thus the expectation of the growth rate is constant 
 $\mathbb{E}[r_i]=\rho$.
 
-This process describes for example the growth of a bank account accruing interest each period at an interest rate which follows an exp-OU process. This is the interest rates process assumed in the [Black-Karasinski model](https://en.wikipedia.org/wiki/Black%E2%80%93Karasinski_model). 
+The limiting case of $Z_t = \sigma W_t$ a Brownian motion, corresponds to the growth rates $r_t$ following a geometric Brownian motion in discrete time. This case is more tractable and all positive integer moments $\mathbb{E}[(B_i)^n]$ can be computed exactly. This case was discussed in [this](https://arxiv.org/abs/1505.02834) paper, and a statistical mechanics analogy to a lattice gas was discussed [here](https://link.springer.com/article/10.1007/s10955-013-0889-3). Chapter 2 of [Pirjol (2022)](https://link.springer.com/book/10.1007/978-3-031-11143-3) gives a pedagogical discussion with Mathematica codes.
+
+The process (1) describes for example the growth of a bank account accruing interest each period at an interest rate which follows an exp-OU process. This is the interest rates process assumed in the [Black-Karasinski model](https://en.wikipedia.org/wiki/Black%E2%80%93Karasinski_model). 
 A similar model can be used to describe the growth of a positive quantity with correlated growth rates, for example a population undergoing growth in a random environment. More precisely the growth rates $r_i$ have Markovian dependence, which is appropriate for example for an environmental variable such as temperature, oxygen supply or food resources.
+
+Mathematically the process for $B_i$ is a stochastic recursion $$B_{i+1}= a(Z_i) B_i$$ with Markov dependence of the multipliers $a(Z) = 1 + \rho e^{Z - \frac12 var(Z)}$.
 
 The process can be generalized such that the growth rates $r_i$ can be both positive and negative, for example by adding deterministic multipliers as
 $$B_{i+1} = \frac{1}{1+\rho} (1 + \rho e^{Z_i - \frac12 var(Z_i) }) B_i\qquad (2)$$ which corresponds to a growth rate
